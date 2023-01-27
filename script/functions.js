@@ -177,7 +177,7 @@ export const MainWeatherReportArea = () => {
     temp.innerText += ' -17 °';
 
     let Visibility = document.createElement('p');
-    let Visibility_span = document.createElement("span")
+    let Visibility_span = document.createElement('span')
     Visibility_span.innerText = "Visibility -"
     Visibility.appendChild(Visibility_span);
     Visibility.innerText += ' 16 Km';
@@ -190,7 +190,7 @@ export const MainWeatherReportArea = () => {
 
     let U_V = document.createElement('p');
     let U_V_span = document.createElement("span")
-    U_V_span.innerText = "U_V -"
+    U_V_span.innerText = "UV -"
     U_V.appendChild(U_V_span);
     U_V.innerText += ' 16 Km';
 
