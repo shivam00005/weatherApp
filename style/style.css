@@ -91,69 +91,135 @@ body {
     background-color: rgba(240, 248, 255, 0.4);
 }
 
-.currentWeather {
-    width: 20%;
-    height: 800px;
-    margin: 10px 40px;
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
+.dayTimeCard {
+
     display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    border-radius: 15px;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.644), -2px -4px 10px rgba(0, 0, 0, 0.781);
-}
-
-.heading_2 {
-    color: white;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    font-family: 'Overlock SC', cursive;
-
-}
-
-.weatherDescription img {
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 70%;
     height: auto;
-}
-
-
-.weatherDescription {
-    padding: 20px;
-}
-
-.weatherDescription h2, h3, p {
-    text-transform: uppercase;
+    margin: 10px 0 0 0;
     color: rgba(255, 255, 255, 0.897);
-    text-align: center;
-    padding: 10px 5px;
+    font-family: 'Overlock SC', cursive;
+    box-sizing: border-box;
 
 }
 
-.temp {
-    font-size: 3rem;
-    color: rgba(225, 226, 227, 0.79);
+
+.wrapper {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
 
 }
 
-p {
+.button-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    flex-wrap: wrap;
+    z-index: 3;
+
+
+
+}
+
+.button-wrapper button {
+    padding: 3px 5px;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 10px;
+    font-size: 1.3rem;
+    border: 0px;
+    color: white;
+
+}
+
+.button-wrapper #left-button:hover {
+    transform: translateX(-3px);
+    background-color: rgba(255, 255, 255, 0.416);
+
+
+}
+
+.button-wrapper #right-button:hover {
+    transform: translateX(3px);
+    background-color: rgba(255, 255, 255, 0.416);
+
+}
+
+.carousel {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    left: 0;
+    position: absolute;
+    transition: all 1s ease;
+}
+
+.card {
+    min-width: 200px;
+    height: 200px;
+    margin-right: 1rem;
+    display: inline-block;
+}
+
+.dayCard {
+    z-index: 1;
+    margin: 0 10px;
     display: flex;
     flex-direction: row;
-    text-align: center;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+}
+
+.timecard {
+
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.644), -2px -4px 10px rgba(0, 0, 0, 0.781);
+    margin-top: 20px;
+
 }
 
-.weatherDescription p span {
-    padding: 0 2px;
-    font-size: 1.2rem;
+.timecard img {
+    width: 70px;
+    height: 70px;
 }
 
-.location {
-    padding-top: 2px;
+.timecard h2 {
+    font-size: 2rem;
 }
 
-.currentWeather:hover {
+.time {
+    padding: 10px 0;
+    font-size: 1rem;
+}
+
+.timecard:hover {
     background-color: rgba(255, 255, 255, 0.3);
 
+}
+
+
+.mainDisplayArea {
+    margin-top: 20px;
+    padding: 20px 0;
+    width: 100%;
 }
