@@ -1,5 +1,5 @@
 import curentWeather from "./functions.js"
-import { hourlyCards } from "./functions.js"
+import { hourlyCards, MainWeatherReportArea } from "./functions.js"
 
 // change background function
 
@@ -19,3 +19,4 @@ function backgroundChange() {
 backgroundChange();
 curentWeather();
 hourlyCards();
+MainWeatherReportArea();

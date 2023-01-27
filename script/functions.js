@@ -60,6 +60,7 @@ export function hourlyCards() {
 
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
+    dayTimeCard.id = "dayTimeCardWraper";
 
     dayTimeCard.innerHTML = `<h2>Regina hourly Weather Report</h2>`;
 
@@ -131,6 +132,87 @@ export function hourlyCards() {
 
 
 
+}
+
+export const MainWeatherReportArea = () => {
+    let output = document.getElementById('main');
+
+    let dayTimeCard = document.getElementById("dayTimeCardWraper");
+
+    let mainDisplayArea = document.createElement('div');
+    mainDisplayArea.className = "mainDisplayArea";
+
+    let detial_heading = document.createElement('div')
+    detial_heading.className = "detail_head";
+
+
+    let weatherHeading = document.createElement('p');
+    weatherHeading.className = 'weatherHeading';
+    weatherHeading.innerText = "Weather Details";
+
+    let datetime = document.createElement('p');
+    datetime.id = 'datetime';
+    datetime.innerText = "January 22,2023 / 10:22:55 pm";
+
+    detial_heading.appendChild(weatherHeading);
+    detial_heading.appendChild(datetime);
+    mainDisplayArea.appendChild(detial_heading);
+
+    let weatherDetails = document.createElement('div');
+    weatherDetails.className = "waetherDetails";
+
+    let details = document.createElement('div')
+    details.className = "deatils";
+
+    // can be done with loop
+    let temp = document.createElement('p');
+    let temp_span = document.createElement("span")
+    temp_span.innerText = "Feels like -"
+    temp.appendChild(temp_span);
+    temp.innerText += ' -17 °';
+
+    let Visibility = document.createElement('p');
+    let Visibility_span = document.createElement("span")
+    Visibility_span.innerText = "Visibility -"
+    Visibility.appendChild(Visibility_span);
+    Visibility.innerText += ' 16 Km';
+
+    let Humidity = document.createElement('p');
+    let Humidity_span = document.createElement("span")
+    Humidity_span.innerText = "Humidity -"
+    Humidity.appendChild(Humidity_span);
+    Humidity.innerText += ' 77% ';
+
+    let U_V = document.createElement('p');
+    let U_V_span = document.createElement("span")
+    U_V_span.innerText = "U_V -"
+    U_V.appendChild(U_V_span);
+    U_V.innerText += ' 16 Km';
+
+    let Pressure = document.createElement('p');
+    let Pressure_span = document.createElement("span")
+    Pressure_span.innerText = "Air Pressure -"
+    Pressure.appendChild(Pressure_span);
+    Pressure.innerText += ' 1020 hPa';
+
+    let WNW = document.createElement('p');
+    let WNW_span = document.createElement("span")
+    WNW_span.innerText = "WNW -";
+    WNW.appendChild(WNW_span);
+    WNW.innerText += ' 11 Km';
+
+
+    details.appendChild(temp);
+    details.appendChild(Visibility);
+    details.appendChild(Humidity);
+    details.appendChild(U_V);
+    details.appendChild(Pressure);
+    details.appendChild(WNW);
+
+    weatherDetails.appendChild(details)
+    mainDisplayArea.appendChild(weatherDetails)
+    dayTimeCard.appendChild(mainDisplayArea)
+    output.appendChild(dayTimeCard)
 }
 
 export default curentWeather;
