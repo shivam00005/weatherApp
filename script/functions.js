@@ -56,7 +56,7 @@ const curentWeather = () => {
 
 export function hourlyCards() {
 
-    let output = document.getElementById('output');
+    let output = document.getElementById('mian');
 
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
