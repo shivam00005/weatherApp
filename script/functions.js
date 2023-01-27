@@ -54,6 +54,9 @@ const curentWeather = () => {
 
 }
 
+export default curentWeather;
+
+// this function dispay hourly weather report
 export function hourlyCards() {
 
     let output = document.getElementById("main");
@@ -133,6 +136,8 @@ export function hourlyCards() {
 
 
 }
+
+// this function dispaly all current weather condition 
 
 export const MainWeatherReportArea = () => {
     let output = document.getElementById('main');
@@ -215,4 +220,41 @@ export const MainWeatherReportArea = () => {
     output.appendChild(dayTimeCard)
 }
 
-export default curentWeather;
+// next week function renders next 6 day weather report
+
+
+export const nextWeekWeather = () => {
+
+    let nextWeek = document.getElementById('weekCards');
+    nextWeek.innerHTML = '<h2>Next Week Weather Report </h2>';
+
+    let NextWeekCardHoldwer = document.createElement('div')
+    NextWeekCardHoldwer.className = "NextWeekCardHoldwer";
+
+    for (let i = 1; i < 8; i++) {
+        let timecard = document.createElement('div');
+        timecard.className = 'timecard';
+
+        let day = document.createElement('h2')
+        day.className = 'day';
+        day.innerText = 'monday';
+
+        let img = document.createElement('img');
+        img.setAttribute('src', 'images/tempImg.png');
+        img.setAttribute('alt', 'current weather icon');
+
+        let temprature = document.createElement('h2')
+        temprature.className = 'temp';
+        temprature.innerText = '7°';
+
+        timecard.appendChild(day);
+        timecard.appendChild(img);
+        timecard.appendChild(temprature);
+        NextWeekCardHoldwer.appendChild(timecard);
+
+    }
+
+    nextWeek.appendChild(NextWeekCardHoldwer);
+
+}
+
