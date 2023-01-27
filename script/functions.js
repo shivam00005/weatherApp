@@ -1,7 +1,7 @@
 // current waether function 
 
-export const cuurentWeather = () => {
-    let output = document.getElementById('output');
+const curentWeather = () => {
+    let output = document.getElementById('main');
 
 
     let currentweather = document.createElement('div');
@@ -10,8 +10,8 @@ export const cuurentWeather = () => {
     let heading = document.createElement('h2');
     heading.className = "heading_2";
 
-    let desciption = document.createElement('div');
-    desciption.className = 'weatherDescription';
+    let description = document.createElement('div');
+    description.className = 'weatherDescription';
 
     let img = document.createElement('img');
     img.setAttribute('src', 'images/tempImg.png');
@@ -41,15 +41,17 @@ export const cuurentWeather = () => {
     address.innerText = 'regina';
 
     currentweather.appendChild(heading);
-    desciption.appendChild(img);
-    desciption.appendChild(text);
-    desciption.appendChild(temprature);
-    desciption.appendChild(currenDate);
+    description.appendChild(img);
+    description.appendChild(text);
+    description.appendChild(temprature);
+    description.appendChild(currenDate);
     location.appendChild(icon);
     location.appendChild(address);
-    desciption.appendChild(location);
-    currentweather.appendChild(desciption);
-    output.appendChild(cuurentWeather);
+    description.appendChild(location);
+    currentweather.appendChild(description);
+    output.appendChild(currentweather);
 
 
 }
+
+export default curentWeather;
