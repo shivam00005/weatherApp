@@ -18,6 +18,17 @@ body {
 
 }
 
+#main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+}
+
 #weatherForm {
     display: flex;
     flex-direction: row;
