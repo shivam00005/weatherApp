@@ -97,7 +97,7 @@ const carsoule = () => {
 
     // Add the click events
     leftButton.addEventListener("click", function () {
-        if (offset !== maxRightCarsoule) {
+        if (offset !== maxLeftCarsoule) {
             offset += (carouselWidth + cardMarginRight);
             carousel.style.transform = `translateX(${offset}px)`;
             console.log(offset)
@@ -106,7 +106,7 @@ const carsoule = () => {
     })
 
     rightButton.addEventListener("click", function () {
-        if (offset !== maxLeftCarsoule) {
+        if (offset !== maxRightCarsoule) {
             offset -= (carouselWidth + cardMarginRight);
             carousel.style.transform = `translateX(${offset}px)`;
             console.log(offset)
