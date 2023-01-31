@@ -1,3 +1,22 @@
+//change backgound color woth respect time
+export function backgroundChange() {
+    let time = new Date();
+    let hours = time.getHours();
+    if (5 <= hours && hours < 8) {//Morning
+        document.body.style.backgroundImage = "url('images/sunrise.jpg')";
+    }
+    if (8 <= hours && hours < 17) {//Day
+        document.body.style.backgroundImage = "url('images/day.jpg')";
+    }
+    if (17 <= hours && hours < 19) {//Evening
+        document.body.style.backgroundImage = "url('images/eveninig.jpg')";
+    }
+    if (19 <= hours && hours < 5) {//Night
+        document.body.style.backgroundImage = "url('images/night.jpg')";
+    }
+}
+
+
 // current waether function 
 const curentWeather = () => {
     let output = document.getElementById('main');
@@ -66,6 +85,7 @@ const carsoule = () => {
     let carouselWidth = carousel.offsetWidth;
     const cardStyle = card.currentStyle || window.getComputedStyle(card)
     const cardMarginRight = Number(cardStyle.marginRight.match(/\d+/g)[0]);
+
     const cardCount = document.querySelectorAll("[data-target='card']").length;
 
     // Define an offset property to dynamically update by clicking the button controls
@@ -169,6 +189,7 @@ export const MainWeatherReportArea = () => {
 
     let detial_heading = document.createElement('div')
     detial_heading.className = "detail_head";
+    detial_heading.id = "d_head";
 
     let weatherHeading = document.createElement('p');
     weatherHeading.className = 'weatherHeading';
@@ -176,7 +197,8 @@ export const MainWeatherReportArea = () => {
 
     let datetime = document.createElement('p');
     datetime.id = 'datetime';
-    datetime.innerText = "January 22,2023 / 10:22:55 pm";
+    // dateAndTime(); // seting live date and time
+
 
     detial_heading.appendChild(weatherHeading);
     detial_heading.appendChild(datetime);
@@ -237,6 +259,33 @@ export const MainWeatherReportArea = () => {
     output.appendChild(dayTimeCard)
 }
 
+
+// add live date and time function
+export function dateAndTime() {
+
+    let time = new Date();
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+    let seconds = time.getSeconds();
+    let session = 'PM';
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    if (hours < 12) {
+        session = 'AM';
+    }
+    let deatilHead = document.getElementById('d_head');
+    let dateTime = deatilHead.querySelector('#datetime');
+
+    dateTime.innerText = `${time.toLocaleDateString()} / ${hours}:${minutes}:${seconds} ${session}`;
+
+    var t = setTimeout(() => {
+        dateAndTime();
+    }, 1000);
+
+}
 // next week function renders next 6 day weather report
 export const nextWeekWeather = () => {
     let nextWeek = document.getElementById('weekCards');
