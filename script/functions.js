@@ -1,5 +1,22 @@
-// current waether function 
+//change backgound color woth respect time
+export function backgroundChange() {
+    let time = new Date();
+    let hours = time.getHours();
+    if (5 <= hours && hours < 8) {//Morning
+        document.body.style.backgroundImage = "url('images/sunrise.jpg')";
+    }
+    if (8 <= hours && hours < 17) {//Day
+        document.body.style.backgroundImage = "url('images/day.jpg')";
+    }
+    if (17 <= hours && hours < 19) {//Evening
+        document.body.style.backgroundImage = "url('images/eveninig.jpg')";
+    }
+    if (19 <= hours && hours < 5) {//Night
+        document.body.style.backgroundImage = "url('images/night.jpg')";
+    }
+}
 
+// current waether function 
 const curentWeather = () => {
     let output = document.getElementById('main');
 
