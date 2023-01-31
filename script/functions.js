@@ -56,6 +56,70 @@ const curentWeather = () => {
 
 export default curentWeather;
 
+
+// create carsoule
+
+const carsoule = () => {
+    // Select the carousel you'll need to manipulate and the buttons you'll add events to
+    const Cards = document.querySelector(".wrapper");
+    const carousel = document.getElementById("hourTime");
+    const card = carousel.querySelector('.card');
+    const leftButton = Cards.querySelector("#left-button");
+    const rightButton = Cards.querySelector("#right-button");
+
+
+
+
+    // Prepare to limit the direction in which the carousel can slide,
+    // and to control how much the carousel advances by each time.
+    // In order to slide the carousel so that only three cards are perfectly visible each time,
+    // you need to know the carousel width, and the margin placed on a given card in the carousel
+
+    let carouselWidth = carousel.offsetWidth;
+    const cardStyle = card.currentStyle || window.getComputedStyle(card)
+    const cardMarginRight = Number(cardStyle.marginRight.match(/\d+/g)[0]);
+
+    console.log(cardMarginRight)
+
+
+
+    const cardCount = document.querySelectorAll("[data-target='card']").length;
+
+
+
+    // Define an offset property to dynamically update by clicking the button controls
+    // as well as a maxX property so the carousel knows when to stop at the upper limit
+    // both maxX and max is used to limit left and right movement of carsoule
+
+    let offset = 0;
+    const maxRightCarsoule = -Math.floor(((cardCount / 8) * carouselWidth + (cardMarginRight * (cardCount / 8)) - carouselWidth - cardMarginRight));
+    const maxLeftCarsoule = ((cardCount / 6) * carouselWidth + (cardMarginRight * (cardCount / 6)) - carouselWidth - cardMarginRight);
+
+    // Add the click events
+    leftButton.addEventListener("click", function () {
+        if (offset !== maxRightCarsoule) {
+            offset += (carouselWidth + cardMarginRight);
+            carousel.style.transform = `translateX(${offset}px)`;
+            console.log(offset)
+
+        }
+    })
+
+    rightButton.addEventListener("click", function () {
+        if (offset !== maxLeftCarsoule) {
+            offset -= (carouselWidth + cardMarginRight);
+            carousel.style.transform = `translateX(${offset}px)`;
+            console.log(offset)
+
+        }
+
+    })
+
+
+
+}
+
+
 // this function dispay hourly weather report
 export function hourlyCards() {
 
@@ -74,7 +138,8 @@ export function hourlyCards() {
 
     let dayCard = document.createElement('ol');
     dayCard.className = "dayCard carousel";
-    dayCard.setAttribute('data-target', 'carousel')
+    dayCard.id = "hourTime"
+    dayCard.setAttribute('data-target', 'carousel');
 
 
 
@@ -99,7 +164,7 @@ export function hourlyCards() {
         let dayTime = document.createElement('span')
         dayTime.className = 'time';
 
-        i > 12 ? dayTime.innerText = i + ' Pm ' : dayTime.innerText = i + ' Am ';
+        i >= 12 ? dayTime.innerText = i + ' Pm ' : dayTime.innerText = i + ' Am ';
 
 
         timecard.appendChild(img);
@@ -118,11 +183,11 @@ export function hourlyCards() {
     buttonWrapper.className = 'button-wrapper';
 
     let leftBtn = document.createElement('button');
-    leftBtn.setAttribute('id', 'left-button');
+    leftBtn.id = 'left-button';
     leftBtn.innerText = '<';
 
     let rightBtn = document.createElement('button');
-    rightBtn.setAttribute('id', 'right-button');
+    rightBtn.id = 'right-button';
     rightBtn.innerText = '>';
 
     buttonWrapper.appendChild(leftBtn);
@@ -133,9 +198,11 @@ export function hourlyCards() {
     dayTimeCard.appendChild(Cards);
     output.appendChild(dayTimeCard);
 
-
+    carsoule();
 
 }
+
+
 
 // this function dispaly all current weather condition 
 
