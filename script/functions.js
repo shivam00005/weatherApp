@@ -257,4 +257,3 @@ export const nextWeekWeather = () => {
     nextWeek.appendChild(NextWeekCardHoldwer);
 
 }
-
