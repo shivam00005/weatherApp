@@ -16,10 +16,10 @@ export function backgroundChange() {
     }
 }
 
+
 // current waether function 
 const curentWeather = () => {
     let output = document.getElementById('main');
-
 
     let currentweather = document.createElement('div');
     currentweather.className = 'currentWeather';
@@ -39,7 +39,6 @@ const curentWeather = () => {
 
     let temprature = document.createElement('h2');
     temprature.className = "temp";
-
     temprature.innerText = '7°';
 
     let currenDate = document.createElement('h3');
@@ -51,10 +50,8 @@ const curentWeather = () => {
 
     icon.innerText = 'pin_drop';
 
-
     let address = document.createElement('span');
     address.className = 'location';
-
     address.innerText = 'regina';
 
     currentweather.appendChild(heading);
@@ -68,14 +65,10 @@ const curentWeather = () => {
     currentweather.appendChild(description);
     output.appendChild(currentweather);
 
-
 }
-
 export default curentWeather;
 
-
 // create carsoule
-
 const carsoule = () => {
     // Select the carousel you'll need to manipulate and the buttons you'll add events to
     const Cards = document.querySelector(".wrapper");
@@ -83,9 +76,6 @@ const carsoule = () => {
     const card = carousel.querySelector('.card');
     const leftButton = Cards.querySelector("#left-button");
     const rightButton = Cards.querySelector("#right-button");
-
-
-
 
     // Prepare to limit the direction in which the carousel can slide,
     // and to control how much the carousel advances by each time.
@@ -96,72 +86,51 @@ const carsoule = () => {
     const cardStyle = card.currentStyle || window.getComputedStyle(card)
     const cardMarginRight = Number(cardStyle.marginRight.match(/\d+/g)[0]);
 
-
-
-
     const cardCount = document.querySelectorAll("[data-target='card']").length;
-
-
 
     // Define an offset property to dynamically update by clicking the button controls
     // as well as a maxX property so the carousel knows when to stop at the upper limit
     // both maxX and max is used to limit left and right movement of carsoule
 
     let offset = 0;
-    const maxRightCarsoule = -Math.floor(((cardCount / 8) * carouselWidth + (cardMarginRight * (cardCount / 8)) - carouselWidth - cardMarginRight));
-    const maxLeftCarsoule = ((cardCount / 6) * carouselWidth + (cardMarginRight * (cardCount / 6)) - carouselWidth - cardMarginRight);
+    let rightLimitCard = 8;
+    let leftLimitCard = 6;
+    const maxRightCarsoule = -Math.floor(((cardCount / rightLimitCard) * carouselWidth + (cardMarginRight * (cardCount / rightLimitCard)) - carouselWidth - cardMarginRight));
+    const maxLeftCarsoule = ((cardCount / leftLimitCard) * carouselWidth + (cardMarginRight * (cardCount / leftLimitCard)) - carouselWidth - cardMarginRight);
 
     // Add the click events
     leftButton.addEventListener("click", function () {
-        if (offset !== maxRightCarsoule) {
+        if (offset !== maxLeftCarsoule) {
             offset += (carouselWidth + cardMarginRight);
             carousel.style.transform = `translateX(${offset}px)`;
-            console.log(offset)
-
         }
     })
-
     rightButton.addEventListener("click", function () {
-        if (offset !== maxLeftCarsoule) {
+        if (offset !== maxRightCarsoule) {
             offset -= (carouselWidth + cardMarginRight);
             carousel.style.transform = `translateX(${offset}px)`;
-            console.log(offset)
-
         }
-
     })
-
-
-
 }
 
 
 // this function dispay hourly weather report
 export function hourlyCards() {
-
     let output = document.getElementById("main");
-
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
     dayTimeCard.id = "dayTimeCardWraper";
-
     dayTimeCard.innerHTML = `<h2>Regina hourly Weather Report</h2>`;
-
 
     let Cards = document.createElement('div');
     Cards.className = 'wrapper';
-
 
     let dayCard = document.createElement('ol');
     dayCard.className = "dayCard carousel";
     dayCard.id = "hourTime"
     dayCard.setAttribute('data-target', 'carousel');
 
-
-
-
     for (let i = 1; i < 25; i++) {
-
         let card = document.createElement('li');
         card.className = 'card';
         card.setAttribute('data-target', 'card');
@@ -182,17 +151,12 @@ export function hourlyCards() {
 
         i >= 12 ? dayTime.innerText = i + ' Pm ' : dayTime.innerText = i + ' Am ';
 
-
         timecard.appendChild(img);
         timecard.appendChild(temprature);
         timecard.appendChild(dayTime);
-
         card.appendChild(timecard);
-
         dayCard.appendChild(card);
         Cards.appendChild(dayCard);
-
-
     }
 
     let buttonWrapper = document.createElement('div');
@@ -208,20 +172,13 @@ export function hourlyCards() {
 
     buttonWrapper.appendChild(leftBtn);
     buttonWrapper.appendChild(rightBtn);
-
     Cards.appendChild(buttonWrapper);
-
     dayTimeCard.appendChild(Cards);
     output.appendChild(dayTimeCard);
-
     carsoule();
-
 }
 
-
-
 // this function dispaly all current weather condition 
-
 export const MainWeatherReportArea = () => {
     let output = document.getElementById('main');
 
@@ -233,7 +190,6 @@ export const MainWeatherReportArea = () => {
     let detial_heading = document.createElement('div')
     detial_heading.className = "detail_head";
     detial_heading.id = "d_head";
-
 
     let weatherHeading = document.createElement('p');
     weatherHeading.className = 'weatherHeading';
@@ -291,14 +247,12 @@ export const MainWeatherReportArea = () => {
     WNW.appendChild(WNW_span);
     WNW.innerText += ' 11 Km';
 
-
     details.appendChild(temp);
     details.appendChild(Visibility);
     details.appendChild(Humidity);
     details.appendChild(U_V);
     details.appendChild(Pressure);
     details.appendChild(WNW);
-
     weatherDetails.appendChild(details)
     mainDisplayArea.appendChild(weatherDetails)
     dayTimeCard.appendChild(mainDisplayArea)
@@ -333,10 +287,7 @@ export function dateAndTime() {
 
 }
 // next week function renders next 6 day weather report
-
-
 export const nextWeekWeather = () => {
-
     let nextWeek = document.getElementById('weekCards');
     nextWeek.innerHTML = '<h2>Next Week Weather Report </h2>';
 
@@ -363,9 +314,6 @@ export const nextWeekWeather = () => {
         timecard.appendChild(img);
         timecard.appendChild(temprature);
         NextWeekCardHoldwer.appendChild(timecard);
-
     }
-
     nextWeek.appendChild(NextWeekCardHoldwer);
-
 }
