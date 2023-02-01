@@ -16,6 +16,16 @@ export function backgroundChange() {
     }
 }
 
+//user search 
+let search = document.getElementById('search');
+search.addEventListener('click', () => {
+    let state = document.getElementById('State').value;
+    let city = document.getElementById('city').value;
+    console.log(state)
+    console.log(city)
+});
+
+
 // current waether function 
 const curentWeather = () => {
     let output = document.getElementById('main');

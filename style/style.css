@@ -70,7 +70,7 @@ body {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.1);
     border: 0px;
-    color: aliceblue;
+    color: rgb(126, 124, 124);
 }
 
 #weatherForm label {
@@ -79,7 +79,7 @@ body {
     margin-right: 5px;
 }
 
-#weatherForm button {
+#weatherForm a {
     background-color: rgba(0, 157, 255, 0.611);
     color: rgba(255, 255, 255, 0.866);
     border-radius: 7px;
@@ -92,7 +92,7 @@ body {
 
 }
 
-#weatherForm button:hover {
+#weatherForm a:hover {
     background-color: rgba(240, 248, 255, 0.808);
     border: 1px solid rgba(0, 157, 255, 0.611);
     border-style: inset;
