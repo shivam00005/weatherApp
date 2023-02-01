@@ -1,7 +1,9 @@
 //change backgound color woth respect time
-export function backgroundChange() {
+export const backgroundChange = () => {
     let time = new Date();
     let hours = time.getHours();
+    console.log(hours)
+
     if (5 <= hours && hours < 8) {//Morning
         document.body.style.backgroundImage = "url('images/sunrise.jpg')";
     }
@@ -11,8 +13,12 @@ export function backgroundChange() {
     if (17 <= hours && hours < 19) {//Evening
         document.body.style.backgroundImage = "url('images/eveninig.jpg')";
     }
-    if (19 <= hours && hours < 5) {//Night
+    if (19 <= hours) {//Night
         document.body.style.backgroundImage = "url('images/night.jpg')";
+    }
+    else if (hours < 5) {//Night
+        document.body.style.backgroundImage = "url('images/night.jpg')";
+
     }
 }
 
