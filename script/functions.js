@@ -11,7 +11,7 @@ export const backgroundChange = () => {
         document.body.style.backgroundImage = "url('images/day.jpg')";
     }
     if (17 <= hours && hours < 19) {//Evening
-        document.body.style.backgroundImage = "url('images/eveninig.jpg')";
+        document.body.style.backgroundImage = "url('images/evening.jpg')";
     }
     if (19 <= hours) {//Night
         document.body.style.backgroundImage = "url('images/night.jpg')";
@@ -22,13 +22,28 @@ export const backgroundChange = () => {
     }
 }
 
+// fetch api  // api is form  rapidapi.com
+const apiSetUp = async (city) => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '0de5154fc9msh280c254e779df51p107213jsna1cb069469b2',
+            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+        }
+    };
+
+    fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+}
+
 //user search 
 let search = document.getElementById('search');
 search.addEventListener('click', () => {
-    let state = document.getElementById('State').value;
     let city = document.getElementById('city').value;
-    console.log(state)
-    console.log(city)
+    apiSetUp(city)
+
 });
 
 // current waether function 
