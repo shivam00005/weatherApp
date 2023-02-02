@@ -70,7 +70,11 @@ body {
     border-radius: 10px;
     background-color: rgba(199, 197, 197, 0.403);
     border: 0px;
+    border-right: 1px solid gray;
     color: rgb(126, 124, 124);
+    width: 150px;
+    text-transform: capitalize;
+
 }
 
 #weatherForm label {

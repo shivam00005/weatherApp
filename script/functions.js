@@ -1,9 +1,16 @@
+// sending default loction to API query
+window.onload = function () {
+    let city = document.getElementById('city').value;
+    let region = document.getElementById('state').value;
+    let country = document.getElementById('country').value;
+    if (city == 'Regina' && region == 'Saskatchewan' && country == 'Canada') {
+        apiSetUp(country, region, city);
+    }
+}
 //change backgound color woth respect time
 export const backgroundChange = () => {
     let time = new Date();
     let hours = time.getHours();
-    console.log(hours)
-
     if (5 <= hours && hours < 8) {//Morning
         document.body.style.backgroundImage = "url('images/sunrise.jpg')";
     }
@@ -18,12 +25,11 @@ export const backgroundChange = () => {
     }
     else if (hours < 5) {//Night
         document.body.style.backgroundImage = "url('images/night.jpg')";
-
     }
 }
 
 // fetch api  // api is form  rapidapi.com
-const apiSetUp = async (city) => {
+const apiSetUp = async (city, country, region) => {
     const options = {
         method: 'GET',
         headers: {
@@ -32,7 +38,7 @@ const apiSetUp = async (city) => {
         }
     };
 
-    fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`, options)
+    fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
@@ -42,7 +48,9 @@ const apiSetUp = async (city) => {
 let search = document.getElementById('search');
 search.addEventListener('click', () => {
     let city = document.getElementById('city').value;
-    apiSetUp(city)
+    let region = document.getElementById('state').value;
+    let country = document.getElementById('country').value;
+    apiSetUp(country, region, city);
 
 });
 
