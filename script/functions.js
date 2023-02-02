@@ -193,7 +193,7 @@ export function hourlyCards() {
 }
 
 // this function dispaly all current weather condition 
-export const MainWeatherReportArea = () => {
+export const mainWeatherReportArea = () => {
     let output = document.getElementById('main');
 
     let dayTimeCard = document.getElementById("dayTimeCardWraper");
