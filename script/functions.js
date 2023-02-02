@@ -17,7 +17,7 @@ export function backgroundChange() {
 }
 
 // fetch api  // api is form  rapidapi.com
-const apiSetUp = async (state, city) => {
+const apiSetUp = async (city) => {
     const options = {
         method: 'GET',
         headers: {
@@ -26,7 +26,7 @@ const apiSetUp = async (state, city) => {
         }
     };
 
-    fetch('https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina&days=3', options)
+    fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`, options)
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
@@ -35,9 +35,8 @@ const apiSetUp = async (state, city) => {
 //user search 
 let search = document.getElementById('search');
 search.addEventListener('click', () => {
-    let state = document.getElementById('State').value;
     let city = document.getElementById('city').value;
-    apiSetUp(state, city)
+    apiSetUp(city)
 
 });
 
