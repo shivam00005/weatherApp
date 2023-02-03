@@ -1,11 +1,6 @@
 // sending default loction to API query
 window.onload = function () {
-    let city = document.getElementById('city').value;
-    let region = document.getElementById('state').value;
-    let country = document.getElementById('country').value;
-    if (city == 'Regina' && region == 'Saskatchewan' && country == 'Canada') {
-        apiSetUp(country, region, city);
-    }
+    apiSetUp()
 }
 //change backgound color woth respect time
 export const backgroundChange = () => {
@@ -37,11 +32,17 @@ const apiSetUp = async (city, country, region) => {
             'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
         }
     };
-
-    fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+    if (city == null && region == null && country == null) {
+        await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    } else {
+        await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    }
 }
 
 //user search 
@@ -234,8 +235,6 @@ export const mainWeatherReportArea = () => {
 
     let datetime = document.createElement('p');
     datetime.id = 'datetime';
-    // dateAndTime(); // seting live date and time
-
 
     detial_heading.appendChild(weatherHeading);
     detial_heading.appendChild(datetime);
