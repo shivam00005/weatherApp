@@ -59,8 +59,7 @@ search.addEventListener('click', () => {
     let city = document.getElementById('city').value;
     let region = document.getElementById('state').value;
     let country = document.getElementById('country').value;
-    console.log(apiSetUp(city, country, region))
-
+    apiSetUp(city, country, region);
 });
 
 // current waether function 
@@ -69,6 +68,8 @@ const curentWeather = async (data) => {
     let currentReport = await data;
     let report = currentReport.current;
     let reportLocation = currentReport.location;
+    let currenDateForecast = currentReport.forecast.forecastday[0].day;
+
     let output = document.getElementById('main');
 
     let currentweather = document.createElement('div');
@@ -91,6 +92,10 @@ const curentWeather = async (data) => {
     temprature.className = "temp";
     temprature.innerText = `${report.temp_c}°`;
 
+    let maxMin = document.createElement('p');
+    maxMin.className = "currenDate";
+    maxMin.innerText = `Max Temp ${currenDateForecast.maxtemp_c}° | Min Temp ${currenDateForecast.mintemp_c}°`
+
     let currenDate = document.createElement('p');
     currenDate.className = "currenDate";
     currenDate.innerText = `Last Update : ${report.last_updated}`
@@ -98,7 +103,6 @@ const curentWeather = async (data) => {
     let location = document.createElement('p');
     let icon = document.createElement('span');
     icon.className = 'material-symbols-outlined';
-
     icon.innerText = 'pin_drop';
 
     let address = document.createElement('span');
@@ -116,6 +120,7 @@ const curentWeather = async (data) => {
     description.appendChild(currenDate);
     location.appendChild(icon);
     location.appendChild(address);
+    description.appendChild(maxMin);
     description.appendChild(location);
     description.appendChild(countryRegion);
     currentweather.appendChild(description);
@@ -174,7 +179,6 @@ const carsoule = () => {
 export async function hourlyCards(data) {
     let weatherforecast = await data;
     let currenDateForecast = weatherforecast.forecast.forecastday[0];
-    console.log(currenDateForecast)
     let output = document.getElementById("main");
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
@@ -203,7 +207,7 @@ export async function hourlyCards(data) {
 
         let temprature = document.createElement('h2')
         temprature.className = 'temp';
-        temprature.innerText = `${currenDateForecast.hour[i].temp_c}°`;
+        temprature.innerText = `${currenDateForecast.hour[i].temp_c}°c`;
 
         let dayTime = document.createElement('span')
         dayTime.className = 'time';
@@ -238,10 +242,13 @@ export async function hourlyCards(data) {
 }
 
 // this function dispaly all current weather condition 
-export const mainWeatherReportArea = () => {
+export const mainWeatherReportArea = async (data) => {
+    let MoreWeatherDetails = await data;
+    let currentDetail = MoreWeatherDetails.current;
+    // console.log(currentDetail)
     let output = document.getElementById('main');
 
-    let dayTimeCard = document.getElementById("dayTimeCardWraper");
+    let dayTimeCard = output.querySelector("#dayTimeCardWraper");
 
     let mainDisplayArea = document.createElement('div');
     mainDisplayArea.className = "mainDisplayArea";
@@ -270,52 +277,51 @@ export const mainWeatherReportArea = () => {
     // can be done with loop
     let temp = document.createElement('p');
     let temp_span = document.createElement("span")
-    temp_span.innerText = "Feels like -"
+    temp_span.innerText = "Feelslike  "
     temp.appendChild(temp_span);
-    temp.innerText += ' -17 °';
+    temp.innerText += ` ${currentDetail.feelslike_c}°c`;
 
     let Visibility = document.createElement('p');
     let Visibility_span = document.createElement('span')
-    Visibility_span.innerText = "Visibility -"
+    Visibility_span.innerText = "Visibility  "
     Visibility.appendChild(Visibility_span);
-    Visibility.innerText += ' 16 Km';
+    Visibility.innerText += `${currentDetail.vis_km}km`;
 
     let Humidity = document.createElement('p');
     let Humidity_span = document.createElement("span")
-    Humidity_span.innerText = "Humidity -"
+    Humidity_span.innerText = "Humidity  "
     Humidity.appendChild(Humidity_span);
-    Humidity.innerText += ' 77% ';
+    Humidity.innerText += `${currentDetail.humidity}%`;
 
     let U_V = document.createElement('p');
     let U_V_span = document.createElement("span")
-    U_V_span.innerText = "UV -"
+    U_V_span.innerText = "UV "
     U_V.appendChild(U_V_span);
-    U_V.innerText += ' 16 Km';
+    U_V.innerText += ` ${currentDetail.uv}km`;
 
     let Pressure = document.createElement('p');
     let Pressure_span = document.createElement("span")
-    Pressure_span.innerText = "Air Pressure -"
+    Pressure_span.innerText = "Pressure  "
     Pressure.appendChild(Pressure_span);
-    Pressure.innerText += ' 1020 hPa';
+    Pressure.innerText += `${currentDetail.pressure_mb}mb`;
 
-    let WNW = document.createElement('p');
-    let WNW_span = document.createElement("span")
-    WNW_span.innerText = "WNW -";
-    WNW.appendChild(WNW_span);
-    WNW.innerText += ' 11 Km';
+    let wind = document.createElement('p');
+    let wind_span = document.createElement("span")
+    wind_span.innerText = " wind  ";
+    wind.appendChild(wind_span);
+    wind.innerText += `${currentDetail.wind_kph}kph`;
 
     details.appendChild(temp);
     details.appendChild(Visibility);
     details.appendChild(Humidity);
     details.appendChild(U_V);
     details.appendChild(Pressure);
-    details.appendChild(WNW);
+    details.appendChild(wind);
     weatherDetails.appendChild(details)
     mainDisplayArea.appendChild(weatherDetails)
     dayTimeCard.appendChild(mainDisplayArea)
     output.appendChild(dayTimeCard)
 }
-
 
 // add live date and time function
 export function dateAndTime() {
@@ -335,7 +341,6 @@ export function dateAndTime() {
     }
     let deatilHead = document.getElementById('d_head');
     let dateTime = deatilHead.querySelector('#datetime');
-
     dateTime.innerText = `${time.toLocaleDateString()} / ${hours}:${minutes}:${seconds} ${session}`;
 
     var t = setTimeout(() => {
