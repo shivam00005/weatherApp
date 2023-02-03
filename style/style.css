@@ -105,7 +105,7 @@ body {
 
 .currentWeather {
     width: 20%;
-    height: 800px;
+    height: 500px;
     margin: 10px 40px;
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
@@ -125,13 +125,13 @@ body {
 }
 
 .weatherDescription img {
-    width: 70%;
+    width: 50%;
     height: auto;
 }
 
 
 .weatherDescription {
-    padding: 20px;
+    padding: 0px 10px;
 }
 
 .weatherDescription h2, h3, p {
@@ -323,23 +323,23 @@ p {
 
 .deatils {
     display: grid;
-    grid: auto / auto auto auto;
-    text-align: left;
-    column-gap: 70px;
+    grid: auto / auto auto auto auto auto auto;
+    text-align: center;
+    column-gap: 15px;
 }
 
 .deatils p {
-    padding: 20px;
-    margin: 20px 20px 20px 20px;
+    padding: 15px;
+    margin: 20px 0;
     background-color: rgba(255, 255, 255, 0.08);
     border-radius: 5px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.644), -2px -4px 10px rgba(0, 0, 0, 0.781);
     backdrop-filter: blur(5px);
-    width: 250px;
-    height: 200px;
+    width: 140px;
+    height: 140px;
     display: flex;
     flex-direction: column;
-    font-size: 2.5rem;
+    font-size: 1.4rem;
 }
 
 .deatils span {

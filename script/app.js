@@ -5,6 +5,8 @@ let data = apiSetUp();
 backgroundChange();
 curentWeather(data);
 hourlyCards(data);
-// mainWeatherReportArea();
-// dateAndTime();
+(async function () {
+    await mainWeatherReportArea(data);
+    await dateAndTime();
+})();
 // nextWeekWeather();
