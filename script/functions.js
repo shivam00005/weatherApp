@@ -36,22 +36,18 @@ export const apiSetUp = async (city, country, region) => {
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options);
         if (retrive.status === 200) {
             const response = await retrive.json();
-            // console.log(response)
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            // console.log(err)
             return err
         }
     } else {
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
         if (retrive.status === 200) {
             const response = await retrive.json();
-            // console.log(response)
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            // console.log(err)
             return err
         }
     }
@@ -73,7 +69,6 @@ const curentWeather = async (data) => {
     let currentReport = await data;
     let report = currentReport.current;
     let reportLocation = currentReport.location;
-    console.log(reportLocation)
     let output = document.getElementById('main');
 
     let currentweather = document.createElement('div');
@@ -176,7 +171,10 @@ const carsoule = () => {
 
 
 // this function dispay hourly weather report
-export function hourlyCards() {
+export async function hourlyCards(data) {
+    let weatherforecast = await data;
+    let currenDateForecast = weatherforecast.forecast.forecastday[0];
+    console.log(currenDateForecast)
     let output = document.getElementById("main");
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
@@ -191,7 +189,7 @@ export function hourlyCards() {
     dayCard.id = "hourTime"
     dayCard.setAttribute('data-target', 'carousel');
 
-    for (let i = 1; i < 25; i++) {
+    for (let i = 0; i < currenDateForecast.hour.length; i++) {
         let card = document.createElement('li');
         card.className = 'card';
         card.setAttribute('data-target', 'card');
@@ -205,7 +203,7 @@ export function hourlyCards() {
 
         let temprature = document.createElement('h2')
         temprature.className = 'temp';
-        temprature.innerText = '7°';
+        temprature.innerText = `${currenDateForecast.hour[i].temp_c}°`;
 
         let dayTime = document.createElement('span')
         dayTime.className = 'time';
