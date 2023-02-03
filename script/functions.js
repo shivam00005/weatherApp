@@ -305,18 +305,18 @@ export const mainWeatherReportArea = async (data) => {
     Pressure.appendChild(Pressure_span);
     Pressure.innerText += `${currentDetail.pressure_mb} mb`;
 
-    let Wind = document.createElement('p');
-    let Wind_span = document.createElement("span")
-    Wind_span.innerText = " Wind  ";
-    Wind.appendChild(Wind_span);
-    Wind.innerText += `${currentDetail.wind_kph}Kph`;
+    let wind = document.createElement('p');
+    let wind_span = document.createElement("span")
+    wind_span.innerText = " wind  ";
+    wind.appendChild(wind_span);
+    wind.innerText += `${currentDetail.wind_kph}Kph`;
 
     details.appendChild(temp);
     details.appendChild(Visibility);
     details.appendChild(Humidity);
     details.appendChild(U_V);
     details.appendChild(Pressure);
-    details.appendChild(Wind);
+    details.appendChild(wind);
     weatherDetails.appendChild(details)
     mainDisplayArea.appendChild(weatherDetails)
     dayTimeCard.appendChild(mainDisplayArea)
