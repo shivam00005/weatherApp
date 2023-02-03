@@ -36,22 +36,18 @@ export const apiSetUp = async (city, country, region) => {
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options);
         if (retrive.status === 200) {
             const response = await retrive.json();
-            // console.log(response)
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            // console.log(err)
             return err
         }
     } else {
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
         if (retrive.status === 200) {
             const response = await retrive.json();
-            console.log(response)
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            // console.log(err)
             return err
         }
     }
@@ -73,7 +69,7 @@ const curentWeather = async (data) => {
     let report = currentReport.current;
     let reportLocation = currentReport.location;
     let currenDateForecast = currentReport.forecast.forecastday[0].day;
-    // console.log(report)
+    
     let output = document.getElementById('main');
 
     let currentweather = document.createElement('div');
@@ -183,7 +179,6 @@ const carsoule = () => {
 export async function hourlyCards(data) {
     let weatherforecast = await data;
     let currenDateForecast = weatherforecast.forecast.forecastday[0];
-    // console.log(currenDateForecast)
     let output = document.getElementById("main");
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
