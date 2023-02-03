@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.866);
+
 }
 
 body {
@@ -66,7 +68,7 @@ body {
     background-color: rgba(199, 197, 197, 0.403);
     border: 0px;
     border-right: 1px solid gray;
-    color: rgb(126, 124, 124);
+    color: rgb(63, 63, 63);
     width: 180px;
     text-transform: capitalize;
 }
@@ -151,9 +153,10 @@ p {
     justify-content: center;
 }
 
-.weatherDescription p span {
+.weatherDescription p span, .weatherDescription span {
     padding: 0 2px;
     font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
 .location {
