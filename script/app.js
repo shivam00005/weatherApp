@@ -9,4 +9,6 @@ hourlyCards(data);
     await mainWeatherReportArea(data);
     await dateAndTime();
 })();
+// mainWeatherReportArea();
+// dateAndTime();
 // nextWeekWeather();
