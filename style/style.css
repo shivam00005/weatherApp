@@ -8,8 +8,7 @@
 
 body {
     background-attachment: fixed;
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
+    text-transform: capitalize;
     overflow-x: hidden;
     width: 100vw;
     height: 100vh;
@@ -49,7 +48,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     color: rgba(255, 255, 255, 0.866);
-    font-family: 'Overlock SC', cursive;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .sideHeader img {
@@ -120,8 +119,7 @@ body {
 .heading_2 {
     color: white;
     font-size: 1.5rem;
-    text-transform: uppercase;
-    font-family: 'Overlock SC', cursive;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .weatherDescription img {
@@ -135,7 +133,6 @@ body {
 }
 
 .weatherDescription h2, h3, p {
-    text-transform: uppercase;
     color: rgba(255, 255, 255, 0.897);
     text-align: center;
     padding: 10px 5px;
@@ -177,8 +174,7 @@ p {
     height: auto;
     margin: 10px 0 0 0;
     color: rgba(255, 255, 255, 0.897);
-    font-family: 'Overlock SC', cursive;
-    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif box-sizing: border-box;
 }
 
 
