@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 body {
@@ -15,7 +14,6 @@ body {
     box-sizing: border-box;
     background-size: cover;
     background-repeat: no-repeat;
-
 }
 
 #main {
@@ -26,7 +24,6 @@ body {
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;
-
 }
 
 #weatherForm {
@@ -42,7 +39,6 @@ body {
     padding: 15px;
     border-radius: 10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.644), -2px -4px 10px rgba(0, 0, 0, 0.781);
-
 }
 
 .sideHeader {
@@ -59,7 +55,6 @@ body {
     height: auto;
     border-radius: 10px;
     margin-right: 20px;
-
 }
 
 #weatherForm input {
@@ -70,7 +65,10 @@ body {
     border-radius: 10px;
     background-color: rgba(199, 197, 197, 0.403);
     border: 0px;
+    border-right: 1px solid gray;
     color: rgb(126, 124, 124);
+    width: 180px;
+    text-transform: capitalize;
 }
 
 #weatherForm label {
@@ -89,7 +87,6 @@ body {
     border: 0px;
     border: 1px solid transparent;
     box-sizing: border-box;
-
 }
 
 #weatherForm button:hover {
@@ -123,7 +120,6 @@ body {
     font-size: 1.5rem;
     text-transform: uppercase;
     font-family: 'Overlock SC', cursive;
-
 }
 
 .weatherDescription img {
@@ -141,13 +137,11 @@ body {
     color: rgba(255, 255, 255, 0.897);
     text-align: center;
     padding: 10px 5px;
-
 }
 
 .temp {
     font-size: 3rem;
     color: rgba(225, 226, 227, 0.79);
-
 }
 
 p {
@@ -168,9 +162,7 @@ p {
 
 .currentWeather:hover {
     background-color: rgba(255, 255, 255, 0.3);
-
 }
-
 
 .dayTimeCard {
 
@@ -184,7 +176,6 @@ p {
     color: rgba(255, 255, 255, 0.897);
     font-family: 'Overlock SC', cursive;
     box-sizing: border-box;
-
 }
 
 
@@ -194,7 +185,6 @@ p {
     position: relative;
     overflow: hidden;
     margin: 0 auto;
-
 }
 
 .button-wrapper {
@@ -206,9 +196,6 @@ p {
     position: absolute;
     flex-wrap: wrap;
     z-index: 3;
-
-
-
 }
 
 .button-wrapper button {
@@ -218,22 +205,18 @@ p {
     font-size: 1.3rem;
     border: 0px;
     color: white;
-
 }
 
 .button-wrapper #left-button:hover {
     transform: translateX(-3px);
     background-color: rgba(255, 255, 255, 0.66);
     color: black;
-
-
 }
 
 .button-wrapper #right-button:hover {
     transform: translateX(3px);
     background-color: rgba(255, 255, 255, 0.6);
     color: black;
-
 }
 
 .carousel {
@@ -265,21 +248,18 @@ p {
 }
 
 .timecard {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     align-items: center;
     padding: 7px;
-    /* margin: 0 10px; */
     width: 130px;
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
     border-radius: 5px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.644), -2px -4px 10px rgba(0, 0, 0, 0.781);
     margin-top: 20px;
-
 }
 
 .timecard img {
@@ -301,13 +281,11 @@ p {
 
 }
 
-
 .mainDisplayArea {
     margin-top: 20px;
     padding: 20px 0;
     width: 100%;
 }
-
 
 .detail_head {
     display: flex;
@@ -321,7 +299,6 @@ p {
     margin: 0;
     text-align: left;
 }
-
 
 .detail_head #datetime {
     font-size: 1.2rem;
@@ -360,11 +337,9 @@ p {
     display: flex;
     flex-direction: column;
     font-size: 2.5rem;
-
 }
 
 .deatils span {
-
     font-size: 1.2rem;
 }
 
@@ -374,7 +349,6 @@ p {
     padding: 15px 40px;
     color: rgba(255, 255, 255, 0.897);
     box-sizing: border-box;
-
 }
 
 .NextWeekCardHoldwer {
@@ -393,7 +367,6 @@ footer {
     border-top-left-radius: 15px;
     margin: 0 auto;
     padding: 15px 0;
-
 }
 
 footer p {
