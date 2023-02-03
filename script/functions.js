@@ -33,15 +33,27 @@ const apiSetUp = async (city, country, region) => {
         }
     };
     if (city == null && region == null && country == null) {
-        await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
+        const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options);
+        if (retrive.status === 200) {
+            const response = await retrive.json();
+            console.log(response)
+            return response
+        } else if (retrive.status === 400) {
+            const err = await retrive.json();
+            console.log(err)
+            return err
+        }
     } else {
         await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
+        if (retrive.status === 200) {
+            const response = await retrive.json();
+            console.log(response)
+            return response
+        } else if (retrive.status === 400) {
+            const err = await retrive.json();
+            console.log(err)
+            return err
+        }
     }
 }
 
@@ -51,7 +63,7 @@ search.addEventListener('click', () => {
     let city = document.getElementById('city').value;
     let region = document.getElementById('state').value;
     let country = document.getElementById('country').value;
-    apiSetUp(country, region, city);
+    console.log(apiSetUp(city, country, region))
 
 });
 
