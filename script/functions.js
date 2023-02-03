@@ -207,7 +207,7 @@ export async function hourlyCards(data) {
 
         let temprature = document.createElement('h2')
         temprature.className = 'temp';
-        temprature.innerText = `${currenDateForecast.hour[i].temp_c}°`;
+        temprature.innerText = `${currenDateForecast.hour[i].temp_c}°c`;
 
         let dayTime = document.createElement('span')
         dayTime.className = 'time';
@@ -277,39 +277,39 @@ export const mainWeatherReportArea = async (data) => {
     // can be done with loop
     let temp = document.createElement('p');
     let temp_span = document.createElement("span")
-    temp_span.innerText = "Feels like - "
+    temp_span.innerText = "Feelslike  "
     temp.appendChild(temp_span);
-    temp.innerText += ` ${currentDetail.feelslike_c}°`;
+    temp.innerText += ` ${currentDetail.feelslike_c}°c`;
 
     let Visibility = document.createElement('p');
     let Visibility_span = document.createElement('span')
-    Visibility_span.innerText = "Visibility - "
+    Visibility_span.innerText = "Visibility  "
     Visibility.appendChild(Visibility_span);
-    Visibility.innerText += `${currentDetail.vis_km} Km`;
+    Visibility.innerText += `${currentDetail.vis_km}Km`;
 
     let Humidity = document.createElement('p');
     let Humidity_span = document.createElement("span")
-    Humidity_span.innerText = "Humidity - "
+    Humidity_span.innerText = "Humidity  "
     Humidity.appendChild(Humidity_span);
-    Humidity.innerText += `${currentDetail.humidity} Km`;
+    Humidity.innerText += `${currentDetail.humidity}%`;
 
     let U_V = document.createElement('p');
     let U_V_span = document.createElement("span")
-    U_V_span.innerText = "UV - "
+    U_V_span.innerText = "UV "
     U_V.appendChild(U_V_span);
-    U_V.innerText += `${currentDetail.uv} Km`;
+    U_V.innerText += ` ${currentDetail.uv}Km`;
 
     let Pressure = document.createElement('p');
     let Pressure_span = document.createElement("span")
-    Pressure_span.innerText = "Pressure - "
+    Pressure_span.innerText = "Pressure  "
     Pressure.appendChild(Pressure_span);
     Pressure.innerText += `${currentDetail.pressure_mb} mb`;
 
     let Wind = document.createElement('p');
     let Wind_span = document.createElement("span")
-    Wind_span.innerText = " Wind  - ";
+    Wind_span.innerText = " Wind  ";
     Wind.appendChild(Wind_span);
-    Wind.innerText += `${currentDetail.wind_kph} Kph`;
+    Wind.innerText += `${currentDetail.wind_kph}Kph`;
 
     details.appendChild(temp);
     details.appendChild(Visibility);

@@ -340,6 +340,7 @@ p {
     display: flex;
     flex-direction: column;
     font-size: 1.4rem;
+    letter-spacing: 0.1rem;
 }
 
 .deatils span {
