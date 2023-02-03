@@ -69,7 +69,7 @@ const curentWeather = async (data) => {
     let report = currentReport.current;
     let reportLocation = currentReport.location;
     let currenDateForecast = currentReport.forecast.forecastday[0].day;
-    
+
     let output = document.getElementById('main');
 
     let currentweather = document.createElement('div');
@@ -324,7 +324,7 @@ export const mainWeatherReportArea = async (data) => {
 }
 
 // add live date and time function
-export async function dateAndTime() {
+export function dateAndTime() {
 
     let time = new Date();
     let hours = time.getHours();
