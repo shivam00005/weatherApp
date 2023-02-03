@@ -285,7 +285,7 @@ export const mainWeatherReportArea = async (data) => {
     let Visibility_span = document.createElement('span')
     Visibility_span.innerText = "Visibility  "
     Visibility.appendChild(Visibility_span);
-    Visibility.innerText += `${currentDetail.vis_km}Km`;
+    Visibility.innerText += `${currentDetail.vis_km}km`;
 
     let Humidity = document.createElement('p');
     let Humidity_span = document.createElement("span")
@@ -297,19 +297,19 @@ export const mainWeatherReportArea = async (data) => {
     let U_V_span = document.createElement("span")
     U_V_span.innerText = "UV "
     U_V.appendChild(U_V_span);
-    U_V.innerText += ` ${currentDetail.uv}Km`;
+    U_V.innerText += ` ${currentDetail.uv}km`;
 
     let Pressure = document.createElement('p');
     let Pressure_span = document.createElement("span")
     Pressure_span.innerText = "Pressure  "
     Pressure.appendChild(Pressure_span);
-    Pressure.innerText += `${currentDetail.pressure_mb} mb`;
+    Pressure.innerText += `${currentDetail.pressure_mb}mb`;
 
     let wind = document.createElement('p');
     let wind_span = document.createElement("span")
     wind_span.innerText = " wind  ";
     wind.appendChild(wind_span);
-    wind.innerText += `${currentDetail.wind_kph}Kph`;
+    wind.innerText += `${currentDetail.wind_kph}kph`;
 
     details.appendChild(temp);
     details.appendChild(Visibility);
