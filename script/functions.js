@@ -1,9 +1,11 @@
+// sending default loction to API query
+window.onload = function () {
+    apiSetUp()
+}
 //change backgound color woth respect time
 export const backgroundChange = () => {
     let time = new Date();
     let hours = time.getHours();
-    console.log(hours)
-
     if (5 <= hours && hours < 8) {//Morning
         document.body.style.backgroundImage = "url('images/sunrise.jpg')";
     }
@@ -18,12 +20,11 @@ export const backgroundChange = () => {
     }
     else if (hours < 5) {//Night
         document.body.style.backgroundImage = "url('images/night.jpg')";
-
     }
 }
 
 // fetch api  // api is form  rapidapi.com
-const apiSetUp = async (city) => {
+export const apiSetUp = async (city, country, region) => {
     const options = {
         method: 'GET',
         headers: {
@@ -31,23 +32,48 @@ const apiSetUp = async (city) => {
             'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
         }
     };
-
-    fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`, options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+    if (city == null && region == null && country == null) {
+        const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options);
+        if (retrive.status === 200) {
+            const response = await retrive.json();
+            // console.log(response)
+            return response
+        } else if (retrive.status === 400) {
+            const err = await retrive.json();
+            // console.log(err)
+            return err
+        }
+    } else {
+        const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
+        if (retrive.status === 200) {
+            const response = await retrive.json();
+            // console.log(response)
+            return response
+        } else if (retrive.status === 400) {
+            const err = await retrive.json();
+            // console.log(err)
+            return err
+        }
+    }
 }
 
 //user search 
 let search = document.getElementById('search');
 search.addEventListener('click', () => {
     let city = document.getElementById('city').value;
-    apiSetUp(city)
+    let region = document.getElementById('state').value;
+    let country = document.getElementById('country').value;
+    console.log(apiSetUp(city, country, region))
 
 });
 
 // current waether function 
-const curentWeather = () => {
+const curentWeather = async (data) => {
+
+    let currentReport = await data;
+    let report = currentReport.current;
+    let reportLocation = currentReport.location;
+    console.log(reportLocation)
     let output = document.getElementById('main');
 
     let currentweather = document.createElement('div');
@@ -60,18 +86,19 @@ const curentWeather = () => {
     description.className = 'weatherDescription';
 
     let img = document.createElement('img');
-    img.setAttribute('src', 'images/tempImg.png');
+    img.setAttribute('src', `${report.condition.icon}`);
     img.setAttribute('alt', 'current weather icon');
 
     let text = document.createElement('p');
-    text.innerText = "cloudy";
+    text.innerText = `${report.condition.text}`;
 
     let temprature = document.createElement('h2');
     temprature.className = "temp";
-    temprature.innerText = '7°';
+    temprature.innerText = `${report.temp_c}°`;
 
-    let currenDate = document.createElement('h3');
+    let currenDate = document.createElement('p');
     currenDate.className = "currenDate";
+    currenDate.innerText = `Last Update : ${report.last_updated}`
 
     let location = document.createElement('p');
     let icon = document.createElement('span');
@@ -81,7 +108,11 @@ const curentWeather = () => {
 
     let address = document.createElement('span');
     address.className = 'location';
-    address.innerText = 'regina';
+    address.innerText = `${reportLocation.name}`;
+
+    let countryRegion = document.createElement('span');
+    countryRegion.className = 'location';
+    countryRegion.innerText = `${reportLocation.region}, ${reportLocation.country}`;
 
     currentweather.appendChild(heading);
     description.appendChild(img);
@@ -91,6 +122,7 @@ const curentWeather = () => {
     location.appendChild(icon);
     location.appendChild(address);
     description.appendChild(location);
+    description.appendChild(countryRegion);
     currentweather.appendChild(description);
     output.appendChild(currentweather);
 
@@ -226,8 +258,6 @@ export const mainWeatherReportArea = () => {
 
     let datetime = document.createElement('p');
     datetime.id = 'datetime';
-    // dateAndTime(); // seting live date and time
-
 
     detial_heading.appendChild(weatherHeading);
     detial_heading.appendChild(datetime);
