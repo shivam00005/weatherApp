@@ -24,7 +24,7 @@ export const backgroundChange = () => {
 }
 
 // fetch api  // api is form  rapidapi.com
-const apiSetUp = async (city, country, region) => {
+export const apiSetUp = async (city, country, region) => {
     const options = {
         method: 'GET',
         headers: {
@@ -36,22 +36,22 @@ const apiSetUp = async (city, country, region) => {
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options);
         if (retrive.status === 200) {
             const response = await retrive.json();
-            console.log(response)
+            // console.log(response)
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            console.log(err)
+            // console.log(err)
             return err
         }
     } else {
-        await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
+        const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
         if (retrive.status === 200) {
             const response = await retrive.json();
-            console.log(response)
+            // console.log(response)
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            console.log(err)
+            // console.log(err)
             return err
         }
     }
@@ -68,7 +68,12 @@ search.addEventListener('click', () => {
 });
 
 // current waether function 
-const curentWeather = () => {
+const curentWeather = async (data) => {
+
+    let currentReport = await data;
+    let report = currentReport.current;
+    let reportLocation = currentReport.location;
+    console.log(reportLocation)
     let output = document.getElementById('main');
 
     let currentweather = document.createElement('div');
@@ -81,18 +86,19 @@ const curentWeather = () => {
     description.className = 'weatherDescription';
 
     let img = document.createElement('img');
-    img.setAttribute('src', 'images/tempImg.png');
+    img.setAttribute('src', `${report.condition.icon}`);
     img.setAttribute('alt', 'current weather icon');
 
     let text = document.createElement('p');
-    text.innerText = "cloudy";
+    text.innerText = `${report.condition.text}`;
 
     let temprature = document.createElement('h2');
     temprature.className = "temp";
-    temprature.innerText = '7°';
+    temprature.innerText = `${report.temp_c}°`;
 
-    let currenDate = document.createElement('h3');
+    let currenDate = document.createElement('p');
     currenDate.className = "currenDate";
+    currenDate.innerText = `Last Update : ${report.last_updated}`
 
     let location = document.createElement('p');
     let icon = document.createElement('span');
@@ -102,7 +108,11 @@ const curentWeather = () => {
 
     let address = document.createElement('span');
     address.className = 'location';
-    address.innerText = 'regina';
+    address.innerText = `${reportLocation.name}`;
+
+    let countryRegion = document.createElement('span');
+    countryRegion.className = 'location';
+    countryRegion.innerText = `${reportLocation.region}, ${reportLocation.country}`;
 
     currentweather.appendChild(heading);
     description.appendChild(img);
@@ -112,6 +122,7 @@ const curentWeather = () => {
     location.appendChild(icon);
     location.appendChild(address);
     description.appendChild(location);
+    description.appendChild(countryRegion);
     currentweather.appendChild(description);
     output.appendChild(currentweather);
 

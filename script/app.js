@@ -1,8 +1,8 @@
 import curentWeather from "./functions.js"
-import { hourlyCards, mainWeatherReportArea, nextWeekWeather, dateAndTime, backgroundChange } from "./functions.js"
+import { hourlyCards, mainWeatherReportArea, nextWeekWeather, dateAndTime, backgroundChange, apiSetUp } from "./functions.js"
 
 backgroundChange();
-curentWeather();
+curentWeather(apiSetUp());
 hourlyCards();
 mainWeatherReportArea();
 dateAndTime();
