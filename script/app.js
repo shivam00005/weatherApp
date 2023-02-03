@@ -7,4 +7,4 @@ curentWeather(data);
 hourlyCards(data);
 // mainWeatherReportArea();
 // dateAndTime();
-// nextWeekWeather();
+nextWeekWeather(data);

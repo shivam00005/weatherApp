@@ -174,12 +174,13 @@ const carsoule = () => {
 export async function hourlyCards(data) {
     let weatherforecast = await data;
     let currenDateForecast = weatherforecast.forecast.forecastday[0];
+    let reportLocation = weatherforecast.location;
     console.log(currenDateForecast)
     let output = document.getElementById("main");
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
     dayTimeCard.id = "dayTimeCardWraper";
-    dayTimeCard.innerHTML = `<h2>Regina hourly Weather Report</h2>`;
+    dayTimeCard.innerHTML = `<h2>${reportLocation.name} hourly Weather Report</h2>`;
 
     let Cards = document.createElement('div');
     Cards.className = 'wrapper';
@@ -198,7 +199,7 @@ export async function hourlyCards(data) {
         timecard.className = 'timecard';
 
         let img = document.createElement('img');
-        img.setAttribute('src', 'images/tempImg.png');
+        img.setAttribute('src', `${currenDateForecast.day.condition.icon}`);
         img.setAttribute('alt', 'current weather icon');
 
         let temprature = document.createElement('h2')
@@ -344,33 +345,52 @@ export function dateAndTime() {
 
 }
 // next week function renders next 6 day weather report
-export const nextWeekWeather = () => {
+export const nextWeekWeather = async (data) => {
+
+    let daysForecast = await data;
+    let dayData = daysForecast.forecast.forecastday;
+    console.log(daysForecast.forecast.forecastday)
+
     let nextWeek = document.getElementById('weekCards');
-    nextWeek.innerHTML = '<h2>Next Week Weather Report </h2>';
+    nextWeek.innerHTML = '<h2>Next Two Days Weather Report </h2>';
 
     let NextWeekCardHoldwer = document.createElement('div')
     NextWeekCardHoldwer.className = "NextWeekCardHoldwer";
 
-    for (let i = 1; i < 8; i++) {
-        let timecard = document.createElement('div');
-        timecard.className = 'timecard';
+    for (let i = 1; i < daysForecast.forecast.forecastday.length; i++) {
+        let NextWeekTimecard = document.createElement('div');
+        NextWeekTimecard.className = 'NextWeekTimecard';
 
-        let day = document.createElement('h2')
-        day.className = 'day';
-        day.innerText = 'monday';
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const d = new Date(`${dayData[i].date}`);
+        let day = weekday[d.getDay()];
 
-        let img = document.createElement('img');
-        img.setAttribute('src', 'images/tempImg.png');
-        img.setAttribute('alt', 'current weather icon');
+        let NextWeekDay = document.createElement('h2')
+        NextWeekDay.className = 'NextWeekDay';
+        NextWeekDay.innerText = `${day}`;
 
-        let temprature = document.createElement('h2')
-        temprature.className = 'temp';
-        temprature.innerText = '7°';
+        let NextWeekdate = document.createElement('p')
+        NextWeekdate.className = 'NextWeekdate';
+        NextWeekdate.innerText = `${dayData[i].date}`
 
-        timecard.appendChild(day);
-        timecard.appendChild(img);
-        timecard.appendChild(temprature);
-        NextWeekCardHoldwer.appendChild(timecard);
+        let NextWeekImg = document.createElement('img');
+        NextWeekImg.setAttribute('src', `${dayData[i].day.condition.icon}`);
+        NextWeekImg.setAttribute('alt', 'current weather icon');
+
+        let NextWeekText = document.createElement('p')
+        NextWeekText.className = 'NextWeekText';
+        NextWeekText.innerText = `${dayData[i].day.condition.text}`
+
+        let NextWeekTemprature = document.createElement('h2')
+        NextWeekTemprature.className = 'NextWeekTemprature';
+        NextWeekTemprature.innerText = `Max Temp ${dayData[i].day.maxtemp_c}°C | Min Temp ${dayData[i].day.mintemp_c}°C`;
+
+        NextWeekTimecard.appendChild(NextWeekDay);
+        NextWeekTimecard.appendChild(NextWeekdate);
+        NextWeekTimecard.appendChild(NextWeekImg);
+        NextWeekTimecard.appendChild(NextWeekText);
+        NextWeekTimecard.appendChild(NextWeekTemprature);
+        NextWeekCardHoldwer.appendChild(NextWeekTimecard);
     }
     nextWeek.appendChild(NextWeekCardHoldwer);
 }
