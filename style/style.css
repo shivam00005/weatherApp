@@ -23,7 +23,6 @@ body {
     align-items: flex-start;
     text-align: center;
     width: 100%;
-    min-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -123,8 +122,12 @@ body {
 }
 
 .weatherDescription img {
-    width: 50%;
+    width: 150px;
     height: auto;
+    background-color: rgba(255, 255, 255, 0.159);
+    border: 15px solid rgba(255, 255, 255, 0.305);
+    border-radius: 50%;
+    padding: 20px;
 }
 
 
@@ -174,9 +177,9 @@ p {
     height: auto;
     margin: 10px 0 0 0;
     color: rgba(255, 255, 255, 0.897);
-    font-family: Arial, Helvetica, sans-serif box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
 }
-
 
 .wrapper {
     height: 200px;
@@ -294,7 +297,7 @@ p {
 }
 
 .detail_head .weatherHeading {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 0;
     text-align: left;
 }
@@ -302,7 +305,7 @@ p {
 .detail_head #datetime {
     font-size: 1.2rem;
     text-align: center;
-    padding: 5px 10px 5px 10px;
+    padding: 10px 10px 5px 10px;
     background-color: rgba(255, 255, 255, 0.08);
     border-radius: 5px;
     backdrop-filter: blur(5px);
@@ -325,7 +328,7 @@ p {
 }
 
 .deatils p {
-    padding: 20px;
+    padding-top: 20px;
     margin: 20px 20px 20px 0px;
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 5px;
@@ -336,7 +339,9 @@ p {
     display: flex;
     flex-direction: column;
     font-size: 1.4rem;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.09rem;
+    text-align: center;
+    line-height: 1.8rem;
 }
 
 .deatils span {

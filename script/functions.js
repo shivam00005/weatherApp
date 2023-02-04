@@ -39,23 +39,70 @@ export const apiSetUp = async (city, country, region) => {
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            return err
+            console.log(err)
         }
     } else {
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
         if (retrive.status === 200) {
             const response = await retrive.json();
-            return response
+
+            let curentWeather = response.current;
+            let weatherForecast = response.forecast.forecastday[0];
+            let currentLocation = response.location;
+
+            //poulating data to current card
+            img.src = curentWeather.condition.icon;
+            weatherConditionText.innerText = curentWeather.condition.text;
+            temprature.innerText = curentWeather.temp_c;
+            maxMin.innerText = `Max Temp ${weatherForecast.day.maxtemp_c}°c | Min Temp ${weatherForecast.day.mintemp_c}°c`;
+            lastupdate.innerText = `Last Update : ${curentWeather.last_updated}`;
+            cityName.innerText = `${currentLocation.name}`
+            countryRegion.innerText = `${currentLocation.region}, ${currentLocation.country}`;
+
+            // populating data to hourly card
+            heading.innerText = `${currentLocation.name} hourly Weather Report`;
+            for (let i = 0; i < weatherForecast.hour.length; i++) {
+                document.getElementById(`hourCardIcon${i}`).src = weatherForecast.hour[i].condition.icon;
+                document.getElementById(`hourlyTemprature${i}`).innerText = `${weatherForecast.hour[i].temp_c}°c`;
+            }
+
+            // populating data in main display area
+            feelslike.innerText = ` ${curentWeather.feelslike_c}°c`
+            visibility.innerText = `${curentWeather.vis_km}km`;
+            humidity.innerText = `${curentWeather.humidity}%`;
+            uv.innerText = ` ${curentWeather.uv}km`;
+            pressure.innerText = `${curentWeather.pressure_mb}mb`;
+            wind.innerText = `${curentWeather.wind_kph}kph`;
+
+            //populating data to next two day forecast
+            for (let i = 1; i < response.forecast.forecastday.length; i++) {
+                let dayData = response.forecast.forecastday;
+                const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                let nextDate = dayData[i].date;
+                let dateSplit = nextDate.split('-')
+                nextDate = dateSplit.join(',')
+                const d = new Date(nextDate);
+                let day = weekday[d.getDay()];
+
+                document.getElementById(`nextWeekDay${i}`).innerText = `${day}`;
+                document.getElementById(`NextWeekdate${i}`).innerText = dayData[i].date;
+                document.getElementById(`nextWeekImg${i}`).src = dayData[i].day.condition.icon;
+                document.getElementById(`NextWeekText${i}`).innerText = dayData[i].day.condition.text;
+                document.getElementById(`NextWeekTemprature${i}`).innerText = `Max Temp ${dayData[i].day.maxtemp_c}°C | Min Temp ${dayData[i].day.mintemp_c}°C`;
+
+            }
+
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            return err
+            console.log(err)
         }
     }
 }
 
 //user search 
 let search = document.getElementById('search');
-search.addEventListener('click', () => {
+search.addEventListener('click', (e) => {
+    e.preventDefault();
     let city = document.getElementById('city').value;
     let region = document.getElementById('state').value;
     let country = document.getElementById('country').value;
@@ -82,21 +129,26 @@ const curentWeather = async (data) => {
     description.className = 'weatherDescription';
 
     let img = document.createElement('img');
+    img.id = 'img';
     img.setAttribute('src', `${report.condition.icon}`);
     img.setAttribute('alt', 'current weather icon');
 
     let text = document.createElement('p');
+    text.id = 'weatherConditionText';
     text.innerText = `${report.condition.text}`;
 
     let temprature = document.createElement('h2');
+    temprature.id = "temprature"
     temprature.className = "temp";
     temprature.innerText = `${report.temp_c}°`;
 
     let maxMin = document.createElement('p');
+    maxMin.id = 'maxMin'
     maxMin.className = "currenDate";
-    maxMin.innerText = `Max Temp ${currenDateForecast.maxtemp_c}° | Min Temp ${currenDateForecast.mintemp_c}°`
+    maxMin.innerText = `Max Temp ${currenDateForecast.maxtemp_c}°c | Min Temp ${currenDateForecast.mintemp_c}°c`
 
     let currenDate = document.createElement('p');
+    currenDate.id = 'lastupdate'
     currenDate.className = "currenDate";
     currenDate.innerText = `Last Update : ${report.last_updated}`
 
@@ -107,10 +159,12 @@ const curentWeather = async (data) => {
 
     let address = document.createElement('span');
     address.className = 'location';
+    address.id = 'cityName';
     address.innerText = `${reportLocation.name}`;
 
     let countryRegion = document.createElement('span');
     countryRegion.className = 'location';
+    countryRegion.id = 'countryRegion';
     countryRegion.innerText = `${reportLocation.region}, ${reportLocation.country}`;
 
     currentweather.appendChild(heading);
@@ -180,15 +234,20 @@ export async function hourlyCards(data) {
     let weatherforecast = await data;
     let currenDateForecast = weatherforecast.forecast.forecastday[0];
     let reportLocation = weatherforecast.location;
-  
+
     let output = document.getElementById("main");
     let dayTimeCard = document.createElement('div');
     dayTimeCard.className = "dayTimeCard";
     dayTimeCard.id = "dayTimeCardWraper";
-    dayTimeCard.innerHTML = `<h2>${reportLocation.name} hourly Weather Report</h2>`;
 
-    let Cards = document.createElement('div');
-    Cards.className = 'wrapper';
+    let heading = document.createElement('h2');
+    heading.id = 'heading';
+    heading.innerText = `${reportLocation.name} hourly Weather Report`;
+
+    dayTimeCard.appendChild(heading);
+
+    let cards = document.createElement('div');
+    cards.className = 'wrapper';
 
     let dayCard = document.createElement('ol');
     dayCard.className = "dayCard carousel";
@@ -203,12 +262,14 @@ export async function hourlyCards(data) {
         let timecard = document.createElement('div');
         timecard.className = 'timecard';
 
-        let img = document.createElement('img');
-        img.setAttribute('src', `${currenDateForecast.day.condition.icon}`);
-        img.setAttribute('alt', 'current weather icon');
+        let timeImg = document.createElement('img');
+        timeImg.id = 'hourCardIcon' + i;
+        timeImg.setAttribute('src', `${currenDateForecast.hour[i].condition.icon}`);
+        timeImg.setAttribute('alt', 'current weather icon');
 
         let temprature = document.createElement('h2')
         temprature.className = 'temp';
+        temprature.id = `hourlyTemprature${i}`;
         temprature.innerText = `${currenDateForecast.hour[i].temp_c}°c`;
 
         let dayTime = document.createElement('span')
@@ -216,12 +277,12 @@ export async function hourlyCards(data) {
 
         i >= 12 ? dayTime.innerText = i + ' Pm ' : dayTime.innerText = i + ' Am ';
 
-        timecard.appendChild(img);
+        timecard.appendChild(timeImg);
         timecard.appendChild(temprature);
         timecard.appendChild(dayTime);
         card.appendChild(timecard);
         dayCard.appendChild(card);
-        Cards.appendChild(dayCard);
+        cards.appendChild(dayCard);
     }
 
     let buttonWrapper = document.createElement('div');
@@ -237,17 +298,16 @@ export async function hourlyCards(data) {
 
     buttonWrapper.appendChild(leftBtn);
     buttonWrapper.appendChild(rightBtn);
-    Cards.appendChild(buttonWrapper);
-    dayTimeCard.appendChild(Cards);
+    cards.appendChild(buttonWrapper);
+    dayTimeCard.appendChild(cards);
     output.appendChild(dayTimeCard);
     carsoule();
 }
 
 // this function dispaly all current weather condition 
 export const mainWeatherReportArea = async (data) => {
-    let MoreWeatherDetails = await data;
-    let currentDetail = MoreWeatherDetails.current;
-    // console.log(currentDetail)
+    let moreWeatherDetails = await data;
+    let currentDetail = moreWeatherDetails.current;
     let output = document.getElementById('main');
 
     let dayTimeCard = output.querySelector("#dayTimeCardWraper");
@@ -259,7 +319,7 @@ export const mainWeatherReportArea = async (data) => {
     detial_heading.className = "detail_head";
     detial_heading.id = "d_head";
 
-    let weatherHeading = document.createElement('p');
+    let weatherHeading = document.createElement('h2');
     weatherHeading.className = 'weatherHeading';
     weatherHeading.innerText = "Weather Details";
 
@@ -276,48 +336,53 @@ export const mainWeatherReportArea = async (data) => {
     let details = document.createElement('div')
     details.className = "deatils";
 
-    // can be done with loop
     let temp = document.createElement('p');
     let temp_span = document.createElement("span")
-    temp_span.innerText = "Feelslike  "
+    temp_span.id = 'feelslike';
+    temp.innerText = "Feelslike  "
+    temp_span.innerText = ` ${currentDetail.feelslike_c}°c`;
     temp.appendChild(temp_span);
-    temp.innerText += ` ${currentDetail.feelslike_c}°c`;
 
-    let Visibility = document.createElement('p');
-    let Visibility_span = document.createElement('span')
-    Visibility_span.innerText = "Visibility  "
-    Visibility.appendChild(Visibility_span);
-    Visibility.innerText += `${currentDetail.vis_km}km`;
+    let visibility = document.createElement('p');
+    let visibility_span = document.createElement('span')
+    visibility_span.id = 'visibility';
+    visibility.innerText = "Visibility  "
+    visibility_span.innerText = `${currentDetail.vis_km}km`;
+    visibility.appendChild(visibility_span);
 
-    let Humidity = document.createElement('p');
-    let Humidity_span = document.createElement("span")
-    Humidity_span.innerText = "Humidity  "
-    Humidity.appendChild(Humidity_span);
-    Humidity.innerText += `${currentDetail.humidity}%`;
+    let humidity = document.createElement('p');
+    let humidity_span = document.createElement("span")
+    humidity_span.id = 'humidity';
+    humidity.innerText = "Humidity  "
+    humidity_span.innerText = `${currentDetail.humidity}%`;
+    humidity.appendChild(humidity_span);
 
-    let U_V = document.createElement('p');
-    let U_V_span = document.createElement("span")
-    U_V_span.innerText = "UV "
-    U_V.appendChild(U_V_span);
-    U_V.innerText += ` ${currentDetail.uv}km`;
+    let uv = document.createElement('p');
+    let uv_span = document.createElement("span")
+    uv_span.id = 'uv';
+    uv.innerText = "UV "
+    uv_span.innerText = ` ${currentDetail.uv}km`;
+    uv.appendChild(uv_span);
 
-    let Pressure = document.createElement('p');
-    let Pressure_span = document.createElement("span")
-    Pressure_span.innerText = "Pressure  "
-    Pressure.appendChild(Pressure_span);
-    Pressure.innerText += `${currentDetail.pressure_mb}mb`;
+    let pressure = document.createElement('p');
+    let pressure_span = document.createElement("span")
+    pressure_span.id = 'pressure'
+    pressure.innerText = "Pressure  "
+    pressure_span.innerText = `${currentDetail.pressure_mb}mb`;
+    pressure.appendChild(pressure_span);
 
     let wind = document.createElement('p');
     let wind_span = document.createElement("span")
-    wind_span.innerText = " wind  ";
+    wind_span.id = 'wind';
+    wind.innerText = " wind  ";
+    wind_span.innerText = `${currentDetail.wind_kph}kph`;
     wind.appendChild(wind_span);
-    wind.innerText += `${currentDetail.wind_kph}kph`;
 
     details.appendChild(temp);
-    details.appendChild(Visibility);
-    details.appendChild(Humidity);
-    details.appendChild(U_V);
-    details.appendChild(Pressure);
+    details.appendChild(visibility);
+    details.appendChild(humidity);
+    details.appendChild(uv);
+    details.appendChild(pressure);
     details.appendChild(wind);
     weatherDetails.appendChild(details)
     mainDisplayArea.appendChild(weatherDetails)
@@ -355,48 +420,49 @@ export const nextWeekWeather = async (data) => {
 
     let daysForecast = await data;
     let dayData = daysForecast.forecast.forecastday;
-    console.log(daysForecast.forecast.forecastday)
-
     let nextWeek = document.getElementById('weekCards');
     nextWeek.innerHTML = '<h2>Next Two Days Weather Report </h2>';
 
-    let NextWeekCardHoldwer = document.createElement('div')
-    NextWeekCardHoldwer.className = "NextWeekCardHoldwer";
+    let nextWeekCardHoldwer = document.createElement('div')
+    nextWeekCardHoldwer.className = "NextWeekCardHoldwer";
 
     for (let i = 1; i < daysForecast.forecast.forecastday.length; i++) {
-        let NextWeekTimecard = document.createElement('div');
-        NextWeekTimecard.className = 'NextWeekTimecard';
+        let nextWeekTimecard = document.createElement('div');
+        nextWeekTimecard.className = 'NextWeekTimecard';
 
         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const d = new Date(`${dayData[i].date}`);
+        let nextDate = dayData[i].date;
+        let dateSplit = nextDate.split('-')
+        nextDate = dateSplit.join(',')
+        const d = new Date(nextDate);
         let day = weekday[d.getDay()];
+        let nextWeekDay = document.createElement('h2')
+        nextWeekDay.id = `nextWeekDay${i}`;
+        nextWeekDay.innerText = `${day}`;
 
-        let NextWeekDay = document.createElement('h2')
-        NextWeekDay.className = 'NextWeekDay';
-        NextWeekDay.innerText = `${day}`;
+        let nextWeekdate = document.createElement('p')
+        nextWeekdate.id = `NextWeekdate${i}`;
+        nextWeekdate.innerText = `${dayData[i].date}`
 
-        let NextWeekdate = document.createElement('p')
-        NextWeekdate.className = 'NextWeekdate';
-        NextWeekdate.innerText = `${dayData[i].date}`
+        let nextWeekImg = document.createElement('img');
+        nextWeekImg.id = `nextWeekImg${i}`;
+        nextWeekImg.setAttribute('src', `${dayData[i].day.condition.icon}`);
+        nextWeekImg.setAttribute('alt', 'current weather icon');
 
-        let NextWeekImg = document.createElement('img');
-        NextWeekImg.setAttribute('src', `${dayData[i].day.condition.icon}`);
-        NextWeekImg.setAttribute('alt', 'current weather icon');
+        let nextWeekText = document.createElement('p')
+        nextWeekText.id = `NextWeekText${i}`;
+        nextWeekText.innerText = `${dayData[i].day.condition.text}`
 
-        let NextWeekText = document.createElement('p')
-        NextWeekText.className = 'NextWeekText';
-        NextWeekText.innerText = `${dayData[i].day.condition.text}`
+        let nextWeekTemprature = document.createElement('h2')
+        nextWeekTemprature.id = `NextWeekTemprature${i}`;
+        nextWeekTemprature.innerText = `Max Temp ${dayData[i].day.maxtemp_c}°C | Min Temp ${dayData[i].day.mintemp_c}°C`;
 
-        let NextWeekTemprature = document.createElement('h2')
-        NextWeekTemprature.className = 'NextWeekTemprature';
-        NextWeekTemprature.innerText = `Max Temp ${dayData[i].day.maxtemp_c}°C | Min Temp ${dayData[i].day.mintemp_c}°C`;
-
-        NextWeekTimecard.appendChild(NextWeekDay);
-        NextWeekTimecard.appendChild(NextWeekdate);
-        NextWeekTimecard.appendChild(NextWeekImg);
-        NextWeekTimecard.appendChild(NextWeekText);
-        NextWeekTimecard.appendChild(NextWeekTemprature);
-        NextWeekCardHoldwer.appendChild(NextWeekTimecard);
+        nextWeekTimecard.appendChild(nextWeekDay);
+        nextWeekTimecard.appendChild(nextWeekdate);
+        nextWeekTimecard.appendChild(nextWeekImg);
+        nextWeekTimecard.appendChild(nextWeekText);
+        nextWeekTimecard.appendChild(nextWeekTemprature);
+        nextWeekCardHoldwer.appendChild(nextWeekTimecard);
     }
-    nextWeek.appendChild(NextWeekCardHoldwer);
+    nextWeek.appendChild(nextWeekCardHoldwer);
 }

@@ -7,8 +7,6 @@ curentWeather(data);
 hourlyCards(data);
 (async function () {
     await mainWeatherReportArea(data);
-    await dateAndTime();
+    dateAndTime();
 })();
-// mainWeatherReportArea();
-// dateAndTime();
 nextWeekWeather(data);
