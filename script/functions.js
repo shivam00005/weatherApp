@@ -25,27 +25,26 @@ export const backgroundChange = () => {
 //loader fuction
 const loader = () => {
     document.getElementById('loader').classList.add('show')
+    document.body.style.overflowY = 'hidden'
 
-    setTimeout(() => {
-        document.getElementById('loader').classList.remove('show');
-    }, 3000)
 }
 
 // hide loader
 const loaderHider = () => {
     document.getElementById('loader').classList.remove('show');
+    document.body.style.overflowY = 'visible'
 }
 
 //show error page
 const errorPage = () => {
     document.getElementById('error_page').classList.add('show');
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflowY = 'hidden'
 }
 
 //show error page
 const hideErrorPage = () => {
     document.getElementById('error_page').classList.remove('show');
-    document.body.style.overflow_x = 'hidden'
+    document.body.style.overflowY = 'visible'
 
 }
 

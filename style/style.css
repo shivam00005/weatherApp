@@ -19,10 +19,12 @@ body {
 
 #loader {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
     background: #262626;
-    visibility: hidden;
+    display: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -31,7 +33,7 @@ body {
 }
 
 #loader.show {
-    visibility: visible;
+    display: block;
 }
 
 
@@ -123,15 +125,16 @@ body {
 
 #error_page {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: white;
     z-index: 100;
     display: none;
-    z-index: 100;
 }
 
 .page_404 {
