@@ -10,17 +10,40 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Overlock+SC&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style/style.css">
     <title>Weather App </title>
 </head>
 
 <body>
+    <div id="loader">
+        <div class="ring">Loading
+            <span id="rotator"></span>
+        </div>
+    </div>
+
+    <div id="error_page">
+        <section class="page_404">
+            <div class="container">
+                <div class="row">
+                    <h1 class="text-center ">404</h1>
+                </div>
+
+                <img src='https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif' alt="">
+                <div class="contant_box_404">
+                    <h3 class="h2">
+                        Look like you're lost
+                    </h3>
+
+                    <p>the page you are looking for not avaible!</p>
+
+                    <a href="index.html" class="link_404">Go to Home</a>
+                </div>
+
+
+            </div>
+    </div>
+    </section>
+    </div>
     <div id="weatherForm">
         <div class="sideHeader">
             <img src="images/weather_logo.png" alt="logo">
@@ -49,7 +72,6 @@
     <footer>
         <p>Deveploped By Shivam sharma for education purpose !!</p>
     </footer>
-
     <script type="module" src="script/app.js"></script>
 
 </body>

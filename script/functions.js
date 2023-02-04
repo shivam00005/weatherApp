@@ -22,6 +22,33 @@ export const backgroundChange = () => {
         document.body.style.backgroundImage = "url('images/night.jpg')";
     }
 }
+//loader fuction
+const loader = () => {
+    document.getElementById('loader').classList.add('show')
+
+    setTimeout(() => {
+        document.getElementById('loader').classList.remove('show');
+    }, 3000)
+}
+
+// hide loader
+const loaderHider = () => {
+    document.getElementById('loader').classList.remove('show');
+}
+
+//show error page
+const errorPage = () => {
+    document.getElementById('error_page').classList.add('show');
+    document.body.style.overflow = 'hidden'
+}
+
+//show error page
+const hideErrorPage = () => {
+    document.getElementById('error_page').classList.remove('show');
+    document.body.style.overflow_x = 'hidden'
+
+}
+
 
 // fetch api  // api is form  rapidapi.com
 export const apiSetUp = async (city, country, region) => {
@@ -33,15 +60,22 @@ export const apiSetUp = async (city, country, region) => {
         }
     };
     if (city == null && region == null && country == null) {
+        loader();
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=Regina Saskatchwen Canada&days=3`, options);
         if (retrive.status === 200) {
             const response = await retrive.json();
+            loaderHider();
+            hideErrorPage();
             return response
         } else if (retrive.status === 400) {
             const err = await retrive.json();
-            console.log(err)
+            console.log(err);
+            errorPage();
         }
     } else {
+        loader();
+        hideErrorPage();
+
         const retrive = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city} ${region} ${country}&days=3`, options)
         if (retrive.status === 200) {
             const response = await retrive.json();
@@ -91,10 +125,12 @@ export const apiSetUp = async (city, country, region) => {
                 document.getElementById(`NextWeekTemprature${i}`).innerText = `Max Temp ${dayData[i].day.maxtemp_c}°C | Min Temp ${dayData[i].day.mintemp_c}°C`;
 
             }
-
+            loaderHider();
         } else if (retrive.status === 400) {
             const err = await retrive.json();
             console.log(err)
+            ErrorPage();
+
         }
     }
 }
