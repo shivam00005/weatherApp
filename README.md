@@ -19,19 +19,14 @@ The main purpose of creating the weather web app is to provide a quick and easy 
 
 ## :camera: Screenshots
 
-<img src="https://raw.githubusercontent.com/shivam00005/weatherApp/master/screenshot/home-page.png" alt="home page">
-
-<img src="https://raw.githubusercontent.com/shivam00005/weatherApp/master/screenshot/upper-case.png" alt="loader" >
-<img src="https://raw.githubusercontent.com/shivam00005/weatherApp/master/screenshot/white-screen.png" alt="searched result">
-
-
+<img src="https://raw.githubusercontent.com/shivam00005/weatherApp/master/screenshots/home-page.png" alt="home page">
+<img src="https://raw.githubusercontent.com/shivam00005/weatherApp/master/screenshots/loader.png" alt="loader" >
+<img src="https://raw.githubusercontent.com/shivam00005/weatherApp/master/screenshots/searched-result.png" alt="searched result">
 
 
 ## :information_desk_person: Demo
 
-Live link to visit weather web app: shivam00005.github.io/weatherApp/
-
-
+Live link to visit weather web app: https://shivam00005.github.io/weatherApp/
 
 ### :wrench: Deployment
 
@@ -61,10 +56,6 @@ Live link to visit weather web app: shivam00005.github.io/weatherApp/
 ◉ Double-click on the index.html file to open it in your web browser.
 
 ◉The game should load in your browser and you can start playing.
-
-
-
-
 
 ## :email:Feedback
 
